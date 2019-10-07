@@ -77,12 +77,13 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
 
 - (void)slk_commonInit
 {
-    self.charCountLabelNormalColor = [UIColor lightGrayColor];
+    self.charCountLabelNormalColor = [UIColor colorWithRed:157.0/255.0 green:164.0/255.0 blue:170.0/255.0 alpha:1];
     self.charCountLabelWarningColor = [UIColor redColor];
     
     self.autoHideRightButton = YES;
     self.editorContentViewHeight = 38.0;
-    self.contentInset = UIEdgeInsetsMake(5.0, 8.0, 5.0, 8.0);
+    // 인풋바 컨텐츠 인셋
+    self.contentInset = UIEdgeInsetsMake(10.0, 8.0, 10.0, 8.0);
 
     // Since iOS 11, it is required to call -layoutSubviews before adding custom subviews
     // so private UIToolbar subviews don't interfere on the touch hierarchy
@@ -148,7 +149,7 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
         _textView.returnKeyType = UIReturnKeyDefault;
         _textView.enablesReturnKeyAutomatically = YES;
         _textView.scrollIndicatorInsets = UIEdgeInsetsMake(0.0, -1.0, 0.0, 1.0);
-        _textView.textContainerInset = UIEdgeInsetsMake(8.0, 4.0, 8.0, 0.0);
+        _textView.textContainerInset = UIEdgeInsetsMake(10.0, 4.0, 8.0, 0.0);
         _textView.layer.cornerRadius = 5.0;
         _textView.layer.borderWidth = 0.5;
         _textView.layer.borderColor =  [UIColor colorWithRed:200.0/255.0 green:200.0/255.0 blue:205.0/255.0 alpha:1.0].CGColor;
@@ -657,6 +658,7 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
     NSDictionary *metrics = @{@"top" : @(self.contentInset.top),
                               @"left" : @(self.contentInset.left),
                               @"right" : @(self.contentInset.right),
+                              @"height" : @(50)
                               };
     
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(left)-[leftButton(0)]-(<=left)-[textView]-(right)-[rightButton(0)]-(right)-|" options:0 metrics:metrics views:views]];
@@ -664,6 +666,7 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(>=0)-[rightButton]-(<=0)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-(left@250)-[charCountLabel(<=50@1000)]-(right@750)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[editorContentView(0)]-(<=top)-[textView(0@999)]-(0)-|" options:0 metrics:metrics views:views]];
+    [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-(10)-[textView(39@1000)]-(10)-|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[editorContentView]|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[contentView]|" options:0 metrics:metrics views:views]];
     [self addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[contentView(0)]|" options:0 metrics:metrics views:views]];
