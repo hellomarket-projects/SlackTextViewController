@@ -85,6 +85,11 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
     // 인풋바 컨텐츠 인셋
     self.contentInset = UIEdgeInsetsMake(10.0, 8.0, 10.0, 8.0);
 
+    // 인풋바 배경 변경
+    self.backgroundColor = [UIColor whiteColor];
+    // hairline 제거
+    self.clipsToBounds = YES;
+
     // Since iOS 11, it is required to call -layoutSubviews before adding custom subviews
     // so private UIToolbar subviews don't interfere on the touch hierarchy
     [self layoutSubviews];
@@ -209,7 +214,7 @@ NSString * const SLKTextInputbarDidMoveNotification =   @"SLKTextInputbarDidMove
     if (!_editorContentView) {
         _editorContentView = [UIView new];
         _editorContentView.translatesAutoresizingMaskIntoConstraints = NO;
-        _editorContentView.backgroundColor = self.backgroundColor;
+        _editorContentView.backgroundColor = [UIColor whiteColor];
         _editorContentView.clipsToBounds = YES;
         _editorContentView.hidden = YES;
         
